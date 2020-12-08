@@ -1,0 +1,247 @@
+Live for Speed DCon command line options and text commands
+==========================================================
+
+
+Command line options:
+---------------------
+DCon.exe can be started using a command line or another program.
+
+Before selecting host options, you may find it helpful to run LFS
+and try out the options on the Start New Game screen - the required
+upload bandwidth for those options is displayed on screen.
+
+A command line or a command file is required.
+
+You can use a command file xxx.txt instead of a long command line.
+A command file contains the command line parameters.
+The parameters can be spread onto several lines.
+The command file can contain comments, starting with two slashes //
+Then the command line would be simply:
+
+DCon /cfg=xxx.txt (where xxx.txt is the name of the command file)
+
+If you do not use a command line at all, DCon tries to open a command
+file named "setup.cfg" - an example setup.cfg is provided.
+
+/host=Host Name      :FIRST IN LIST
+/pass=Pass           :if required - password
+/admin=Pass          :if required - admin password
+/ip=X.X.X.X          :if required - local specified ip address
+/port=63392          :a high number below 65536
+/mode=demo           :demo / s1 / s2 / s3
+/usemaster=yes       :no / yes / hidden
+/track=XXCR          :track and config (e.g. BL1 / SO3R / FE4)
+/weather=1           :weather: 1,2,3 in Blackwood
+/cars=[cars]         :see below: "Car Strings"
+/maxguests=4         :max number of guests that can join host
+/adminslots=0        :slots reserved for admins (0 to 8)
+/carsmax=5           :max number of cars in a race
+/carshost=1          :max number of cars (real+ai) on host pc
+/carsguest=1         :max number of cars (real+ai) per guest pc
+/pps=4               :smoothness (3-6) number of car updates per second
+/qual=0              :qualifying minutes, 0 for no qualifying
+/laps=5              :number of lap, 0 for practice
+/wind=1              :0 no wind / 1 low wind / 2 high wind
+/vote=yes            :no / yes: can guests vote to kick or ban
+/select=yes          :no / yes: can guests select track
+/rstmin=X            :no restart for X seconds after race start
+/rstend=X            :no restart for X seconds after race finish
+/autokick=no         :no / kick / ban / spec (wrong way drivers)
+/midrace=yes         :no / yes               (join during race)
+/mustpit=no          :no / yes               (pit stop required)
+/canreset=no         :no / yes               (allow car reset)
+/fcv=no              :no / yes               (force cockpit view)
+/cruise=no           :no / yes               (allow wrong way)
+/modified=no         :no / yes               (avoid CP checks)
+/start=finish        :fixed/finish/reverse/random (default race start)
+/insim=PORT          :listen for InSim (PORT is between 1 and 65535)
+/player=Name         :use the specified player name
+/windowed=X          :no / yes - overrides the cfg.txt setting
+/welcome=X.txt       :set welcome text file
+/tracks=X.txt        :set list of allowed tracks
+/autosave=0          :MPR autosave (0-no / 1-manual / 2-auto)
+/mprdir=X            :set the data folder for mpr saving
+/lytdir=X            :set the data folder for layouts
+
+
+Host commands:
+--------------
+Some text commands are intended for hosts and administrators.
+
+Using the normal text message system (pressing T in a normal host or
+simply typing into a nogfx host), the message becomes a command if you
+start it with a slash character.
+
+Simple commands with no parameter:
+
+/restart             :start a race
+/qualify             :start qualifying
+/end                 :return to race setup screen
+/help                :get list of commands
+/reinit              :total restart (removes all connections)
+/ck                  :cancel any kick or ban votes in progress
+/cv                  :cancel game votes (restart / end / qualify)
+/zero_all            :reset lap counters on all cars
+
+Commands with a parameter - race setup screen:
+
+/track XXCR [W]      :track and config      (e.g. BL1 / SO3R / FE4)
+/weather W           :lighting              (W = 1, 2, 3...)
+/qual X              :qualifying minutes    (0 = no qualifying)
+/laps X              :number of laps        (0 = practice)
+/hours X             :number of hours       (if laps not specified)
+/wind X              :0 no / 1 low / 2 high
+
+Commands with a parameter - any time:
+
+/maxguests X         :max number of guests that can join host
+/adminslots X        :slots reserved for admins (0 to 8)
+/carsmax X           :max number of cars in a race
+/carshost X          :max number of cars (real+ai) on host pc
+/carsguest X         :max number of cars (real+ai) per guest pc
+/pps X               :smoothness (3-6) number of car updates per second
+/msg X               :send system message
+/vote X              :no / yes                    (allow guest voting)
+/select X            :no / yes                    (guests select track)
+/rstmin X            :no restart for X seconds after race start
+/rstend X            :no restart for X seconds after race finish
+/autokick X          :no / kick / ban / spec      (wrong way drivers)
+/midrace X           :no / yes                    (join during race)
+/mustpit X           :no / yes                    (pit stop required)
+/canreset X          :no / yes                    (allow car reset)
+/fcv X               :no / yes                    (force cockpit view)
+/cruise X            :no / yes                    (allow wrong way)
+/modified X          :no / yes                    (avoid CP checks)
+/start X             :fixed/finish/reverse/random (default race start)
+/pass X              :set new password            (BLANK = no password)
+/setlap   USERNAME Y :set user's current lap to Y (negative = subtract)
+/cansiren USERNAME Y :allow or disallow siren     (Y = 0 or 1)
+/ujoin    USERNAME   :adds user to the race
+/uai      USERNAME   :adds user's AI driver to the race
+/cars [cars]         :see below: "Car Strings"
+/welcome X.txt       :set welcome text file
+/tracks X.txt        :set list of allowed tracks
+/hlog X.txt          :set message log file on host
+/autosave X          :MPR autosave (0-no / 1-manual / 2-auto)
+/save_mpr X          :save MPR with name X (autosave must be 1 or 2)
+
+Autocross layout commands:
+
+/axlist X            :get list of layouts for track X - e.g. AU1
+/axload X            :load layout X on host
+/axsave X            :save layout X on host
+/axlaps X            :set autocross number of laps
+/axclear             :clear layout
+
+Ban / Kick / Spectate commands - any time:
+
+/spec X              :make user X join the spectators
+/kick X              :disconnect user X
+/ban X Y             :ban user X for Y days (0 = 12 hours)
+/unban X             :remove ban on user X
+/pitlane X           :send user X to the pit lane
+/pit_all             :send all cars to the pit lane
+
+Penalties:
+
+/p_dt USERNAME       :give drive through penalty
+/p_sg USERNAME       :give stop-go penalty
+/p_30 USERNAME       :give 30 second time penalty
+/p_45 USERNAME       :give 45 second time penalty
+/p_clear USERNAME    :clear a time or pit penalty
+
+Race Control Messages (big text in centre of screen):
+
+/rcm MESSAGE         :set a Race Control Message to be sent
+/rcm_ply USERNAME    :send the RCM to USERNAME
+/rcm_all             :send the RCM to all
+/rcc_ply USERNAME    :clear USERNAME's RCM
+/rcc_all             :clear all RCMs
+
+
+The host commands are also available to any user who has connected to
+the host using the admin password if one was specified when the host
+was started.
+
+
+To display a welcome message on a host:
+---------------------------------------
+Create a text file named "X.txt" in your LFS folder.
+Type up to 200 characters into the text file.
+
+Use the command /welcome=X.txt in your startup command line
+
+
+To restrict the tracks allowed on a host:
+-----------------------------------------
+Create a text file named "X.txt" in your LFS folder.
+List all the tracks and configurations you want to allow.
+Type one configuration on each line.
+You must use the short name of the tracks:
+[first two letters of name] [config number] [reversed]
+
+Example:
+
+BL1
+BL1R
+BL2
+BL2R
+FE1
+FE1R
+
+Use the command /tracks=X.txt in your startup command line
+
+
+Local commands:
+---------------
+Most of these text commands replicate functions usually controlled by
+pressing on-screen buttons but can be useful in other situations, for
+example when controlling LFS from an external program using InSim.
+
+Race setup screen only:
+
+/clear               :clear all racers from list
+
+Any time:
+
+/exit                :exit LFS
+/out X               :only seen by external programs
+/log X.txt           :set message log file
+
+Commands for scripts:
+
+/run X               :run the script X     (data\script\X.lfs)
+/hrun X              :run script X on host (admins only)
+/exec E C            :run program E        (with command line C)
+/wait E C            :like exec but LFS hangs until E exits
+
+IN A SCRIPT: //comment - this line is ignored
+IN CHAT BOX: //xxx - short for /run xxx
+
+
+Car Strings:
+------------
+The /cars command for the startup command line or for
+hosts or admins uses the three-letter car codes.
+
+Example:
+
+/cars=XFG+XRG        :Allow XF GTI and XR GT
+/cars=MRT            :Allow MRT5 only
+
+These Car Groups can be used as well:
+
+ALL    - all cars
+ROAD   - road legal cars
+RACE   - race cars
+TBO    - same as XRT+RB4+FXO
+LRF    - same as LX6+RAC+FZ5
+GTR    - same as FXR+XRR+FZR
+
+The plus and minus symbols can be used in conjuction with these:
+
+/cars=TBO+LX4        :Allow XRT, RB4, FXO and LX4
+/cars=ROAD-UF1       :Allow all road cars except the UF 1000
+
+--------------------------
+www.lfs.net - 9 March 2019

@@ -1,0 +1,12 @@
+lfs=0.6U
+status=online
+guests=0
+maxguests=8
+host=jbb
+pass=
+usemaster=yes
+trackcfg=BL1
+cars=11000000000000000001
+qual=0
+laps=5
+conn=
